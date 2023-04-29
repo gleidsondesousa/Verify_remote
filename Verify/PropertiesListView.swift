@@ -33,7 +33,7 @@ struct PropertiesListView: View {
                 }
             }
             .font(.title2)
-            .listStyle(.plain)
+            .listStyle(.insetGrouped)
             .navigationTitle("Properties")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -56,7 +56,7 @@ struct PropertiesListView: View {
                     }
                 }
                 ToolbarItem(placement: .status) {
-                    Text("# of properties: \(properties.count)")
+                    Text("Number of Properties: \(properties.count)")
                 }
             }
             .sheet(isPresented: $sheetIsPresented) {
@@ -66,6 +66,7 @@ struct PropertiesListView: View {
             }
         }
     }
+    
 }
 
 struct PropertiesListView_Previews: PreviewProvider {

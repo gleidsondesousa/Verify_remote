@@ -47,16 +47,20 @@ struct PropertyDetailView: View {
                 HStack {
                     Text("Receipt:")
                         .bold()
+                        .font(.title)
+                        .padding(.horizontal)
+                    
                     Spacer()
                     
                     PhotosPicker(selection: $selectedPhoto, matching: .images, preferredItemEncoding: .automatic) {
                         Image(systemName: "photo")
                         Text("Photo")
-//                        Label("", systemImage: "photo.fill.on.rectangle.fill")
+
                     }
+                    .padding(.horizontal)
                     .buttonStyle(.borderedProminent)
                     .bold()
-                    .tint(.brown)
+                    .tint(.blue)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     
@@ -104,8 +108,7 @@ struct PropertyDetailView: View {
                     .listRowSeparator(.hidden)
                     .padding(.horizontal)
             }
-        // TODO: Remember to Enable
-//            .disabled(property.id == nil ? false : true)
+            .disabled(property.id == nil ? false : true)
             
             Spacer()
         }
@@ -139,23 +142,6 @@ struct PropertyDetailView: View {
                         }
                     }
                 }
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    Button("Save") {
-//                        Task {
-//                            let success = await propertyVM.saveProperty(property: property)
-//                            if success {
-////                            let id = await propertyVM.saveProperty(property: property)
-////                            if id != nil {
-////                                property.id = id
-//                                await propertyVM.saveImage(id: property.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage())
-//                                dismiss()
-//                            } else {
-//                                print("😡Dang! Error saving spot!")
-//                            }
-//                        }
-//                        dismiss()
-//                    }
-//                }
             }
         }
     }

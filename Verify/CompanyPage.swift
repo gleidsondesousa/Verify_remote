@@ -9,13 +9,24 @@ import SwiftUI
 
 struct CompanyPage: View {
     var body: some View {
-        Link("Bright Expert Website", destination: URL(string: "https://gleidsonjr23.github.io/brightexpert.github.io/index.html")!)
-            .bold()
-            .frame(width: 280, height: 50)
-            .foregroundColor(.white)
-            .background(Color.brown)
-            .cornerRadius(12)
-            .scaledToFit()
+        VStack {
+            Spacer()
+            
+            Image("bright")
+                .resizable()
+                .scaledToFit()
+            
+            Spacer()
+            
+            Link("Bright Expert Website", destination: URL(string: "https://gleidsonjr23.github.io/brightexpert.github.io/index.html")!)
+                .bold()
+                .frame(width: 350, height: 100)
+                .foregroundColor(.white)
+                .background(Color.teal)
+                .cornerRadius(12)
+            
+            Spacer()
+        }
     }
 }
 
