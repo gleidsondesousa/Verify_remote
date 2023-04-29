@@ -21,6 +21,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct VerifyApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var propertyVM = PropertyViewModel()
+    
     var body: some Scene {
         WindowGroup {
             LoginView()

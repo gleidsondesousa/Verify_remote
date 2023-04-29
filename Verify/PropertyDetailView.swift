@@ -13,33 +13,31 @@ import PhotosUI
 struct PropertyDetailView: View {
     
     @EnvironmentObject var propertyVM: PropertyViewModel
-    @State var thisProperty: Property
+    @State var property: Property
     
-    @State private var imageURL: URL?
     @State private var selectedImage: Image = Image(systemName: "photo")
     @State private var selectedPhoto: PhotosPickerItem?
-    
     @Environment(\.dismiss) private var dismiss
+
+    @State private var imageURL: URL?
     
     var body: some View {
         VStack {
             Group {
-                TextField("Address", text: $thisProperty.address)
+                TextField("Address", text: $property.address)
                     .font(.title)
                     .textFieldStyle(.roundedBorder)
                     .listRowSeparator(.hidden)
                     .padding(.horizontal)
                 
-                DatePicker("Purchase Date", selection: $thisProperty.purchaseDate)
+                DatePicker("Purchase Date", selection: $property.purchaseDate)
                     .listRowSeparator(.hidden)
                     .padding(.vertical)
                     .padding(.bottom)
                     .padding(.horizontal)
-                
-                
-                
+
                 Text("Notes:")
-                TextField("Notes", text: $thisProperty.notes, axis: .vertical)
+                TextField("Notes", text: $property.notes, axis: .vertical)
                     .textFieldStyle(.roundedBorder)
                     .listRowSeparator(.hidden)
                     .padding(.horizontal)
@@ -47,7 +45,7 @@ struct PropertyDetailView: View {
                 Spacer()
                 
                 HStack {
-                    Text("Favorite Image:")
+                    Text("Receipt:")
                         .bold()
                     Spacer()
                     
@@ -101,27 +99,27 @@ struct PropertyDetailView: View {
                     .font(.title2)
                     .padding(.horizontal)
                 
-                TextField("Total", text: $thisProperty.total, axis: .vertical)
+                TextField("Total", text: $property.total, axis: .vertical)
                     .textFieldStyle(.roundedBorder)
                     .listRowSeparator(.hidden)
                     .padding(.horizontal)
             }
-            .disabled(thisProperty.id == nil ? false : true)
+        // TODO: Remember to Enable
+//            .disabled(property.id == nil ? false : true)
             
             Spacer()
-                
         }
         .task {
-            if let id = thisProperty.id {
+            if let id = property.id {
                 if let url = await propertyVM.getImageURL(id: id) {
                     imageURL = url
                 }
             }
         }
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(thisProperty.id == nil)
+        .navigationBarBackButtonHidden(property.id == nil)
         .toolbar {
-            if thisProperty.id == nil {
+            if property.id == nil {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
@@ -130,33 +128,34 @@ struct PropertyDetailView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         Task {
-                            let success = await propertyVM.saveProperty(thisProperty: thisProperty)
-                            if success {
-//                            let id = await propertyVM.saveProperty(thisProperty: thisProperty)
-//                            if id != nil {
-//                                thisProperty.id = id
-                                await propertyVM.saveImage(id: thisProperty.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage())
+                            let id = await propertyVM.saveProperty(property: property)
+                            if id != nil { // save worked!
+                                property.id = id
+                                await propertyVM.saveImage(id: property.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage() )
                                 dismiss()
-                            } else {
-                                print("😡Dang! Error saving spot!")
+                            } else { // did not save
+                                print("😡 DANG! Error saving!")
                             }
                         }
-                        dismiss()
                     }
+                }
+//                ToolbarItem(placement: .navigationBarTrailing) {
 //                    Button("Save") {
 //                        Task {
-//                            let id = await propertyVM.saveImage(id: String, image: UIImage)
-//                            if id != nil { // save worked!
-//                                thisProperty.id = id
-//                                print("thisProperty.id = \(thisProperty.id ?? "nil")")
-//                                await propertyVM.saveImage(id: thisProperty.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage())
+//                            let success = await propertyVM.saveProperty(property: property)
+//                            if success {
+////                            let id = await propertyVM.saveProperty(property: property)
+////                            if id != nil {
+////                                property.id = id
+//                                await propertyVM.saveImage(id: property.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage())
 //                                dismiss()
-//                            } else { // did not save
-//                                print("😡 DANG! Error saving student!")
+//                            } else {
+//                                print("😡Dang! Error saving spot!")
 //                            }
 //                        }
+//                        dismiss()
 //                    }
-                }
+//                }
             }
         }
     }
@@ -165,7 +164,7 @@ struct PropertyDetailView: View {
 struct PropertyDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PropertyDetailView(thisProperty: Property())
+            PropertyDetailView(property: Property())
                 .environmentObject(PropertyViewModel())
         }
     }

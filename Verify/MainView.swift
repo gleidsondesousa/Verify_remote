@@ -12,16 +12,19 @@ struct MainView: View {
         TabView {
             PropertiesListView()
                 .tabItem {
-                    Label("Properties", systemImage: "list.dash")
+                    Label("Records", systemImage: "camera.badge.ellipsis")
                 }
-            
             WebView()
                 .tabItem {
-                    Label("Search", systemImage: "square.and.pencil")
+                    Label("Search", systemImage: "magnifyingglass")
                 }
             CompanyPage()
                 .tabItem {
-                    Label("Company", systemImage: "house")
+                    Label("Company", systemImage: "ellipsis")
+                }
+            BalanceSheet()
+                .tabItem {
+                    Label("Balance", systemImage: "square.and.pencil")
                 }
         }
     }

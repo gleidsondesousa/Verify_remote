@@ -11,7 +11,7 @@ import FirebaseStorage
 import UIKit
 
 class PropertyViewModel: ObservableObject {
-    @Published var thisProperty = Property()
+    @Published var property = Property()
     
     func getImageURL(id: String) async -> URL? {
         let storage = Storage.storage()
@@ -96,9 +96,9 @@ class PropertyViewModel: ObservableObject {
         }
     }
     
-    func deleteData(thisProperty: Property) async {
+    func deleteData(property: Property) async {
         let db = Firestore.firestore()
-        guard let id = thisProperty.id else {
+        guard let id = property.id else {
             print("😡 ERROR: id was nil. This should not have happened!")
             return
         }
@@ -113,26 +113,48 @@ class PropertyViewModel: ObservableObject {
         }
     }
     
-    func saveProperty(thisProperty: Property) async -> Bool {
+//    func saveProperty(property: Property) async -> Bool {
+//        let db = Firestore.firestore()
+//
+//        if let id = property.id {
+//            do {
+//                try await db.collection("properties").document(id).setData(property.dictionary) //TODO: add code to append notes and total to dictionary so that it saves in the cloud, and not just address and purchases
+//                print("😎 Data updated successfully")
+//                return true
+//            } catch {
+//                print("😡 ERROR: Could not update data in 'properties' \(error.localizedDescription)")
+//                return false
+//            }
+//        } else {
+//            do {
+//                try await db.collection("properties").addDocument(data: property.dictionary)
+//                print("🐣 Data added successfully")
+//                return true
+//            } catch {
+//                print("😡 ERROR: Could not create a new property in 'properties' \(error.localizedDescription)")
+//                return false
+//            }
+//        }
+//    }
+    func saveProperty(property: Property) async -> String? {
         let db = Firestore.firestore()
-        
-        if let id = thisProperty.id {
+        if let id = property.id { // property must already exist, so save
             do {
-                try await db.collection("properties").document(id).setData(thisProperty.dictionary) //TODO: add code to append notes and total to dictionary so that it saves in the cloud, and not just address and purchases
-                print("😎 Data updated successfully")
-                return true
+                try await db.collection("properties").document(id).setData(property.dictionary)
+                print("😎 Data updated successfully!")
+                return property.id
             } catch {
                 print("😡 ERROR: Could not update data in 'properties' \(error.localizedDescription)")
-                return false
+                return nil
             }
-        } else {
+        } else { // no id? Then this must be a new student to add
             do {
-                try await db.collection("properties").addDocument(data: thisProperty.dictionary)
-                print("🐣 Data added successfully")
-                return true
+                let docRef = try await db.collection("properties").addDocument(data: property.dictionary)
+                print("🐣 Data added successfully!")
+                return docRef.documentID
             } catch {
                 print("😡 ERROR: Could not create a new property in 'properties' \(error.localizedDescription)")
-                return false
+                return nil
             }
         }
     }

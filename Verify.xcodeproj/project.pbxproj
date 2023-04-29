@@ -23,6 +23,7 @@
 		2576B6FB29FB00E700EEFCE2 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2576B6FA29FB00E700EEFCE2 /* WebView.swift */; };
 		2576B6FD29FB03C700EEFCE2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2576B6FC29FB03C700EEFCE2 /* MainView.swift */; };
 		2576B6FF29FC14E800EEFCE2 /* CompanyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2576B6FE29FC14E800EEFCE2 /* CompanyPage.swift */; };
+		2576B70529FC8EB000EEFCE2 /* BalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2576B70429FC8EB000EEFCE2 /* BalanceSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		2576B6FA29FB00E700EEFCE2 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		2576B6FC29FB03C700EEFCE2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2576B6FE29FC14E800EEFCE2 /* CompanyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyPage.swift; sourceTree = "<group>"; };
+		2576B70429FC8EB000EEFCE2 /* BalanceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				2562602929F5D0FA00CCD2DF /* PropertyDetailView.swift */,
 				2576B6FE29FC14E800EEFCE2 /* CompanyPage.swift */,
 				2576B6FA29FB00E700EEFCE2 /* WebView.swift */,
+				2576B70429FC8EB000EEFCE2 /* BalanceSheet.swift */,
 				2562602B29F5E03100CCD2DF /* PropertyViewModel.swift */,
 				2562601029F4B8E800CCD2DF /* Assets.xcassets */,
 				2562602329F4BD2D00CCD2DF /* GoogleService-Info.plist */,
@@ -191,6 +194,7 @@
 				2576B6FD29FB03C700EEFCE2 /* MainView.swift in Sources */,
 				2562602C29F5E03100CCD2DF /* PropertyViewModel.swift in Sources */,
 				2562600D29F4B8E700CCD2DF /* VerifyApp.swift in Sources */,
+				2576B70529FC8EB000EEFCE2 /* BalanceSheet.swift in Sources */,
 				2562602829F5CF9B00CCD2DF /* Property.swift in Sources */,
 				2562602629F5BB5000CCD2DF /* PropertiesListView.swift in Sources */,
 				2562602A29F5D0FA00CCD2DF /* PropertyDetailView.swift in Sources */,

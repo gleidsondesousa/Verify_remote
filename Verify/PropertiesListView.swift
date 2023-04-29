@@ -20,7 +20,7 @@ struct PropertiesListView: View {
             List {
                 ForEach(properties) { property in
                     NavigationLink {
-                        PropertyDetailView(thisProperty: property)
+                        PropertyDetailView(property: property)
                     } label: {
                         Text(property.address)
                     }
@@ -28,7 +28,7 @@ struct PropertiesListView: View {
                 .onDelete { indexSet in
                     guard let index = indexSet.first else {return}
                     Task {
-                        await propertyVM.deleteData(thisProperty: properties[index])
+                        await propertyVM.deleteData(property: properties[index])
                     }
                 }
             }
@@ -61,7 +61,7 @@ struct PropertiesListView: View {
             }
             .sheet(isPresented: $sheetIsPresented) {
                 NavigationStack {
-                    PropertyDetailView(thisProperty: Property())
+                    PropertyDetailView(property: Property())
                 }
             }
         }
